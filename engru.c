@@ -70,7 +70,7 @@ void ru_en_decode(char **english_alphabet, char **russian_alphabet, char *string
 }
 
 //@, #, $, ^, &, ~, `, |, <, > are not supported
-void main() {
+int main() {
     printf("\tWelcome to en/ru decoder!\n");
     printf("Enter your message: ");
     char main_string[100];
@@ -120,4 +120,5 @@ void main() {
     }
 
     printf("\"\n");
+    return 0;
 }
