@@ -72,6 +72,7 @@ void ru_en_decode(char **english_alphabet, char **russian_alphabet, char *string
 //@, #, $, ^, &, ~, `, |, <, > are not supported
 int main() {
     printf("\tWelcome to en/ru decoder!\n");
+    printf(" Warning: write '\\' before '\\' and '\"'\n");
     printf("Enter your message: ");
     char main_string[100];
     scanf(" %[^\n]s", main_string);
@@ -102,8 +103,7 @@ int main() {
         ".", ",", "-", ":", ";", "!", "\"", "№", "%", "?",
         "*", "(", ")", "=", "+", "_", "/", "\\"
     };
-//outputted
-    printf("Your message is: \"%s\"\n", main_string);
+    printf(" Your message is: \"%s\"\n", main_string);
     printf("Decoded message is: \"");
     for (int i = 0; i < 84; ++i) {
         char ch1 = *english_alphabet[i];
