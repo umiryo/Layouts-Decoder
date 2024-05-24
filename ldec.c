@@ -50,13 +50,10 @@ void ru_en_decode(const wchar_t *english_alphabet, const wchar_t *russian_alphab
 
 int main() {
     setlocale(LC_ALL, "");
-    wprintf(L"\tWelcome to en/ru decoder!\n");
-    wprintf(L" Warning: write '\\' before '\\' and '\"'\n");
-    wprintf(L"Enter your message: ");
+    wprintf(L"\t\tLayouts Decoder\n");
+    wprintf(L" Warning: write '\\' before '\\' and '\"'. ");
+    wprintf(L"[^C to exit.]\n\n");
     
-    wchar_t main_string[100];
-    fgetws(main_string, 100, stdin);
-    main_string[wcslen(main_string) - 1] = L'\0';
 
 //@, #, $, ^, &, ~, `, |, <, > are not supported
     wchar_t english_alphabet[84] = {
@@ -84,8 +81,13 @@ int main() {
         L'.', L',', L'-', L':', L';', L'!', L'\"', L'№', L'%', L'?',
         L'*', L'(', L')', L'=', L'+', L'_', L'/', L'\\'
     };
+    while(1) {
+    wprintf(L"Enter your message: ");
+    
+    wchar_t main_string[1000];
+    fgetws(main_string, 1000, stdin);
+    main_string[wcslen(main_string) - 1] = L'\0';
 
-    wprintf(L" Your message is: \"%ls\"\n", main_string);
     wprintf(L"Decoded message is: \"");
 
     int found = 0;
@@ -110,7 +112,7 @@ int main() {
         wprintf(L"No valid characters found for decoding");
     }
     
-    wprintf(L"\"\n");
-    getchar();
+    wprintf(L"\"\n\n");
+    }
     return 0;
 }
