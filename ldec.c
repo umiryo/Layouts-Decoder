@@ -50,6 +50,9 @@ void ru_en_decode(const wchar_t *english_alphabet, const wchar_t *russian_alphab
 
 int main() {
     setlocale(LC_ALL, "");
+
+    size_t size = 1000;
+
     wprintf(L"\t\tLayouts Decoder\n");
     wprintf(L" Warning: write '\\' before '\\' and '\"'. ");
     wprintf(L"[^C to exit.]\n\n");
@@ -84,8 +87,35 @@ int main() {
     while(1) {
     wprintf(L"Enter your message: ");
     
-    wchar_t main_string[1000];
-    fgetws(main_string, 1000, stdin);
+    wchar_t *main_string = malloc(size * sizeof(wchar_t));
+    if (main_string == NULL) {
+        wprintf(L"Memory allocation fault\n");
+        return 1;
+    }
+
+    size_t length = 0;
+
+    while (fgetws(main_string + length, size - length, stdin)) {
+        length += wcslen(main_string + length);
+
+        if (length < size - 1 || main_string[length - 1] == L'\n') {
+            break;
+        }
+
+
+        size *= 2;
+
+        wchar_t *temp = realloc(main_string, size * sizeof(wchar_t));
+        if (temp == NULL) {
+            wprintf(L"Memory allocation fault\n");
+            free(main_string);
+            return 1;
+        }
+
+        main_string = temp;
+
+    }
+
     main_string[wcslen(main_string) - 1] = L'\0';
 
     wprintf(L"Decoded message is: \"");
@@ -113,6 +143,7 @@ int main() {
     }
     
     wprintf(L"\"\n\n");
+    free(main_string);
     }
     return 0;
 }
