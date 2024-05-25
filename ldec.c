@@ -109,7 +109,7 @@ int main() {
     }
 
     if (!found) {
-        wprintf(L"No valid characters found for decoding");
+        wprintf(L"%ls", main_string);
     }
     
     wprintf(L"\"\n\n");
